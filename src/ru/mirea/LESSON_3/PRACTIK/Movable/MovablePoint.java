@@ -8,6 +8,10 @@ public class MovablePoint implements Movable {
     int ySpeed;
 
     public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+        this.x = x;
+        this.y = y;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
     }
 
     @Override
