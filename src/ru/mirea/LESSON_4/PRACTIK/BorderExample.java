@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 
 public class BorderExample extends JFrame {
     JPanel[] pnl = new JPanel[3];
-    public int ACMilanScore = 0;
-    public int RealMadridScore = 0;
+    private int ACMilanScore = 0;
+    private int RealMadridScore = 0;
 
 
     private String getWinner(int acMilanScore, int realMadridScore) {

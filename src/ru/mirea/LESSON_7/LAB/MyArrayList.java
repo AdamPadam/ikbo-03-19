@@ -4,28 +4,27 @@ import java.util.Arrays;
 
 public class MyArrayList {
 
-    private static final int DEFAULT_CAPACITY = 10;
-    private Object[] elements;
-    private int size;
-    private int capacity;
+    private static final int DEFAULT_CAPACITY = 10; //Дефолтный размер массива
+    private Object[] elements; // массив объектов
+    private int size; // количество жлементов в массиве
 
+    // конструктор с задым размером масива
     public MyArrayList(int initialCapacity) {
         if (initialCapacity > 0) {
             this.elements = new Object[initialCapacity];
-            this.capacity = DEFAULT_CAPACITY;
         } else if (initialCapacity == 0) {
             this.elements = new Object[0];
-            this.capacity = 0;
-        } else {
+        } else { // если число < 0 то выкидываем ошибку
             throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
         }
     }
 
+    // если не передаем параметры. то используем константу
     public MyArrayList() {
         this.elements = new Object[DEFAULT_CAPACITY];
-        this.capacity = DEFAULT_CAPACITY;
     }
 
+    //изменения размера массива до количества эллементов
     public void trimToSize() {
         if (size < elements.length) {
             elements = (size == 0) ? new Object[0] : Arrays.copyOf(elements, size);
@@ -40,27 +39,6 @@ public class MyArrayList {
         return size == 0;
     }
 
-    public boolean contains(Object o) {
-        return indexOf(o) >= 0;
-    }
-
-    public int indexOf(Object o) {
-        if (o == null) {
-            for (int i = 0; i < size; i++)
-                if (elements[i] == null)
-                    return i;
-        } else {
-            for (int i = 0; i < size; i++)
-                if (o.equals(elements[i]))
-                    return i;
-        }
-        return -1;
-    }
-
-    public Object[] toArray() {
-        return Arrays.copyOf(elements, size);
-    }
-
     private void rangeCheck(int index) {
         if (index >= size)
             throw new IndexOutOfBoundsException();
@@ -71,11 +49,13 @@ public class MyArrayList {
             throw new IndexOutOfBoundsException();
     }
 
+    //получение элемента по индексу
     public Object get(int index) {
         rangeCheck(index);
         return elements[index];
     }
 
+    //изменения элемента по индексу
     public Object set(int index, Object element) {
         rangeCheck(index);
 
@@ -84,11 +64,18 @@ public class MyArrayList {
         return oldValue;
     }
 
+    //добавление нового элемента
     public boolean add(Object e) {
+        if (size == elements.length - 1) {
+            Object[] old_elements = elements;
+            elements = new Object[(size * 3) / 2 + 1];
+            System.arraycopy(old_elements,0,elements,0,size);
+        }
         elements[size++] = e;
         return true;
     }
 
+    //добавление элемента по индексу
     public void add(int index, Object element) {
         rangeCheckForAdd(index);
 
@@ -142,4 +129,16 @@ public class MyArrayList {
         size = 0;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder out = new StringBuilder("MyArrayList {");
+
+        for (int i = 0; i < size; i++) {
+            out.append(elements[i]);
+            out.append((i != size - 1) ? ", " : "");
+        }
+
+        out.append("}");
+        return out.toString();
+    }
 }
