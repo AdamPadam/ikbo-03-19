@@ -10,15 +10,18 @@ public abstract class Shape extends JComponent {
     private Color color;
     private String text;
 
-    Shape(Color color, String text, int x, int y) {
-        this.color = color;
-        this.text = text;
+    public Shape(int x, int y, Color color, String text) {
         this.x = x;
         this.y = y;
+        this.color = color;
+        this.text = text;
         setOpaque(false);
     }
 
-    protected abstract void paintComponent(Graphics g);
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+    }
 
     public Color getColor() {
         return color;
@@ -36,21 +39,19 @@ public abstract class Shape extends JComponent {
         this.text = text;
     }
 
-    @Override
-    public int getX() {
+    public int getXVar() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setXVar(int x) {
         this.x = x;
     }
 
-    @Override
-    public int getY() {
+    public int getYVar() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setYVar(int y) {
         this.y = y;
     }
 }

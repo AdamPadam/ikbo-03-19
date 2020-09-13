@@ -6,22 +6,17 @@ public class Circle extends Shape {
 
     private int radius;
 
-    public Circle(Color color, String text, int x, int y, int radius) {
-        super(color, text, x, y);
+    public Circle(int x, int y, Color color, String text, int radius) {
+        super(x, y, color, text);
         this.radius = radius;
     }
 
-    public void paintComponent(Graphics g) {
-        g.setColor(getColor());
-        g.fillOval(getX(), getY(), 2*radius, 2*radius);
-        g.drawString(getText(), 10, 35);
-    }
-
-    public int getRadius() {
-        return radius;
-    }
-
-    public void setRadius(int radius) {
-        this.radius = radius;
+    @Override
+    public void paint(Graphics g) {
+        Graphics2D gr2d = (Graphics2D) g;
+        gr2d.setColor(getColor());
+        gr2d.fillOval(getXVar(), getYVar(), 2*radius, 2*radius);
+        gr2d.setColor(Color.BLACK);
+        gr2d.drawString(getText(), getXVar() + 2*radius/3, getYVar() + 2*radius/3);
     }
 }

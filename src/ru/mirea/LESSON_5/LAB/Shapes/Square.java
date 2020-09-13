@@ -4,22 +4,19 @@ import java.awt.*;
 
 public class Square extends Rectangle {
 
-    public Square(Color color, String text, int x, int y, int side) {
-        super(color, text, x, y, side, side);
+    private int side;
+
+    public Square(int x, int y, Color color, String text, int side) {
+        super(x, y, color, text, side, side);
+        this.side = side;
     }
 
-    public int getSide() {
-        return getWidth();
-    }
-
-    public void setSide(int side) {
-        setWidth(side);
-        setHeight(side);
-    }
-
-    public void paintComponent(Graphics g) {
-        g.setColor(getColor());
-        g.fillRect(getX(), getY(), getSide(), getSide());
-        g.drawString(getText(), 10, 35);
+    @Override
+    public void paint(Graphics g) {
+        Graphics2D gr2d = (Graphics2D) g;
+        gr2d.setColor(getColor());
+        gr2d.fillRect(getXVar(), getYVar(), side, side);
+        gr2d.setColor(Color.BLACK);
+        gr2d.drawString(getText(), getXVar() + side/3, getYVar() + side/3);
     }
 }
